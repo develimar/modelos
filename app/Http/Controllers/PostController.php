@@ -75,7 +75,10 @@ class PostController extends Controller
 
 
         //$posts = Post::where('created_at', '>=', date('Y-m-d H:i:s'))->get();
-        $posts = Post::all();
+//        $posts = Post::orderBy('created_at', 'asc')->get();
+
+        //$posts = Post::all();
+        $posts = Post::orderBy('id', 'desc')->get();
         return view('posts.index', ['posts' => $posts]);
 
         //return view('posts.index')->with(['posts' => $posts]);
@@ -93,7 +96,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -104,7 +107,28 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        //
+//        $postRequest = [
+//          'title' => $request->title,
+//          'subtitle' => $request->subtitle,
+//          'description' => $request->description
+//        ];
+
+        //object - prop - save
+//        $post = new Post();
+//        $post->title = $request->title;
+//        $post->subtitle = $request->subtitle;
+//        $post->description = $request->description;
+//        $post->save();
+
+        //mass assagn
+        Post::create([
+          'title' => $request->title,
+          'subtitle' => $request->subtitle,
+          'description' => $request->description
+        ]);
+
+//        return view('posts.index', ['posts' => $posts]);
+        //var_dump($request);
     }
 
     /**

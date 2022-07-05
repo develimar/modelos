@@ -11,11 +11,10 @@
 </head>
 <body>
 
-
-
-
-
 <div class="container my-5">
+
+    <a href="{{route('posts.create')}}" class="btn btn-success mb-3"> Cadastrar novo Artigo </a>
+
     @if($posts)
         @foreach($posts as $post)
             <section class="articles_list">

@@ -23,4 +23,8 @@ class Post extends Model
 //    public const UPDATED_AT = "atualizado_em";
 
 
+//campos permitidos para cadastro
+    protected $fillable = ['title', 'subtitle', 'description'];
+    //campos bloqueados para cadastro
+    protected $guarded = [];
 }
