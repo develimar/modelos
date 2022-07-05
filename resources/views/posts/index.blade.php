@@ -11,16 +11,26 @@
 </head>
 <body>
 
+
+
+
+
 <div class="container my-5">
-    <section class="articles_list">
-        <article class="mb-5">
-            <h1>Título</h1>
-            <h2>Subtítulo</h2>
-            <p>Descrição</p>
-            <small>Criado em: - Editado em: </small>
-        </article>
-        <hr>
-    </section>
+    @if($posts)
+        @foreach($posts as $post)
+            <section class="articles_list">
+                <article class="mb-5">
+                    <h1>Título: {{$post->title}}</h1>
+                    <h2>Subtítulo: {{$post->subtitle}}</h2>
+                    <p>Descrição: {{$post->description}}</p>
+                    <small>Criado em: {{ date('d/m/Y H:i', strtotime($post->created_at))}} - Editado em: {{ date('d/m/Y H:i', strtotime($post->updated_at))}}</small>
+                </article>
+                <hr>
+            </section>
+        @endforeach
+    @else
+        <p>Sem registro Cadastrados!</p>
+    @endif
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
