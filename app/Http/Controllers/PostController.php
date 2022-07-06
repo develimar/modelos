@@ -114,19 +114,39 @@ class PostController extends Controller
 //        ];
 
         //object - prop - save
-//        $post = new Post();
-//        $post->title = $request->title;
-//        $post->subtitle = $request->subtitle;
-//        $post->description = $request->description;
-//        $post->save();
+        $post = new Post();
+        $post->title = $request->title;
+        $post->subtitle = $request->subtitle;
+        $post->description = $request->description;
+        $post->save();
 
         //mass assagn
-        Post::create([
-          'title' => $request->title,
-          'subtitle' => $request->subtitle,
-          'description' => $request->description
-        ]);
+//        Post::create([
+//            'title' => $request->title,
+//            'subtitle' => $request->subtitle,
+//            'description' => $request->description
+//        ]);
 
+
+        //mass assagn
+//        Post::create([
+//            'title' => $request->title,
+//            'subtitle' => $request->subtitle,
+//            'description' => $request->description
+//        ]);
+
+//        if (!is_null($request->title)){
+//            Post::create([
+//                'title' => $request->title,
+//                'subtitle' => $request->subtitle,
+//                'description' => $request->description
+//            ]);
+//            return redirect()->route('posts.index');
+//        }else {
+//            return redirect()->route('posts.index');
+//        }
+
+        return redirect()->action([PostController::class,'index']);
 //        return view('posts.index', ['posts' => $posts]);
         //var_dump($request);
     }
@@ -150,7 +170,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.edit',['post'=>$post]);
     }
 
     /**
@@ -162,7 +182,18 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+//        $post = Post::find($post->id);
+//        $post->title = $request->title;
+//        $post->subtitle = $request->subtitle;
+//        $post->description = $request->description;
+//        $post->save();
+//        return redirect()->action([PostController::class,'index']);
+
+        $post->title = $request->title;
+        $post->subtitle = $request->subtitle;
+        $post->description = $request->description;
+        $post->save();
+        return redirect()->action([PostController::class,'index']);
     }
 
     /**
@@ -173,6 +204,19 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        //Excluindo pelo find
+        //Post::find($post->id)->delete();
+
+        //Excluindo pelo destroy
+        Post::destroy($post->id);
+
+        //Excluindo pelo conjunto de parametros passados
+//        Post::destroy([2,3]);
+
+
+        //return redirect()->action([PostController::class,'index']);
+
+        return redirect()->route('posts.index');
+
     }
 }

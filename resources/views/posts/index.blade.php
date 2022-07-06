@@ -23,6 +23,15 @@
                     <h2>Subtítulo: {{$post->subtitle}}</h2>
                     <p>Descrição: {{$post->description}}</p>
                     <small>Criado em: {{ date('d/m/Y H:i', strtotime($post->created_at))}} - Editado em: {{ date('d/m/Y H:i', strtotime($post->updated_at))}}</small>
+
+{{--                        <a href="{{url("posts/$post->id/edit")}}" class="btn btn-primary mt-3">Editar Artigo</a>--}}
+                    <form action="{{ url('posts/'.$post->id) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <a href="{{url('posts/'.$post->id.'/edit')}}" class="btn btn-primary mt-3">Editar Artigo</a>
+                        <button class="btn btn-danger mt-3">Excluir!</button>
+                    </form>
+
                 </article>
                 <hr>
             </section>
