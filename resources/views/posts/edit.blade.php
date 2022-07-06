@@ -13,6 +13,7 @@
 
 <div class="container my-5">
     <form action="{{url('posts/'.$post->id)}}" method="post" autocomplete="off">
+{{--    <form action="{{url('posts/', ['id' => $post->id]}}" method="post" autocomplete="off">--}}
 
         @csrf
         @method('PUT')

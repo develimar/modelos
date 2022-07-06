@@ -14,7 +14,7 @@
 <div class="container my-5">
 
     <a href="{{route('posts.create')}}" class="btn btn-success mb-3"> Cadastrar novo Artigo </a>
-    <a href="{{route('posts.trashed')}}" class="btn btn-warning mb-3"> Ver Lixeira </a>
+    <a href="{{route('posts.index')}}" class="btn btn-success mb-3"> Ver Todos </a>
 
     @if($posts)
         @foreach($posts as $post)
@@ -26,11 +26,11 @@
                     <small>Criado em: {{ date('d/m/Y H:i', strtotime($post->created_at))}} - Editado em: {{ date('d/m/Y H:i', strtotime($post->updated_at))}}</small>
 
 {{--                        <a href="{{url("posts/$post->id/edit")}}" class="btn btn-primary mt-3">Editar Artigo</a>--}}
-                    <form action="{{ url('posts/'.$post->id) }}" method="post">
+                    <form action="{{ url('posts/'.$post->id.'/forceDelete') }}" method="post">
                         @csrf
                         @method('DELETE')
-                        <a href="{{url('posts/'.$post->id.'/edit')}}" class="btn btn-primary mt-3">Editar Artigo</a>
-                        <button class="btn btn-danger mt-3">Excluir!</button>
+                        <a href="{{url('posts/'.$post->id.'/restore')}}" class="btn btn-primary mt-3">Restaurar</a>
+                        <button class="btn btn-danger mt-3">Excluir Definitivamente!</button>
                     </form>
 
                 </article>
